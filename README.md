@@ -1,2 +1,2 @@
-# biogas-pyevolve
-Pyevolve tests
+# biogas-deap
+deap algorithms tests

@@ -19,6 +19,9 @@ def show_plot(ind):
     listY = getY(ind)
     plt.plot(listX, listY)
     plt.axis([0, listX[7]+2, 0, listY[2]+2])
+    plt.xlabel('Temps (jours)')
+    plt.ylabel('Quantité de méthane (m^3)')
+    #plt.savefig('plot.png', bbox_inches='tight')
     plt.show()
 
 show_plot(ind)

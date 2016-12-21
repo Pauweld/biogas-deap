@@ -1,6 +1,8 @@
 import random
 import argparse
 
+from plot import *
+
 from deap import creator
 from deap import tools
 from deap import base
@@ -38,13 +40,15 @@ def main(a,b,gen):
     toolbox = base.Toolbox()
     toolbox.register("attr_float", random.random)
     toolbox.register("individual", tools.initCycle, creator.Individual,
-                     list((toolbox.attr_float,toolbox.attr_float)), IND_SIZE)
+                     (toolbox.attr_float,toolbox.attr_float), IND_SIZE)
 
     #population
     toolbox.register("population", tools.initRepeat, list, toolbox.individual)
     population = toolbox.population(n=5)
     ind1 = toolbox.individual()
-    print(ind1)
+    ind2 = toolbox.individual()
+    show_plot(ind1)
+    show_plot(ind2)
 
 
 

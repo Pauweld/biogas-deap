@@ -24,5 +24,5 @@ def show_plot(ind):
     #plt.savefig('plot.png', bbox_inches='tight')
     plt.show()
 
-show_plot(ind)
+#show_plot(ind)
 

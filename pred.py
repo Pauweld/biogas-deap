@@ -1,5 +1,9 @@
-from deap import *
+import random
 import argparse
+
+from deap import creator
+from deap import tools
+from deap import base
 
 def main(a,b,gen):
     #data
@@ -26,9 +30,23 @@ def main(a,b,gen):
             return
 
     #algorithm
-    for j in range(0,gen):
-        for k in range(0,nb_intrants_c):
-            print('coucou')   
+    #individus
+    creator.create("FitnessMin", base.Fitness, weights=(-1.0,))
+    creator.create("Individual", list, fitness=creator.FitnessMin)
+
+    IND_SIZE = 7
+    toolbox = base.Toolbox()
+    toolbox.register("attr_float", random.random)
+    toolbox.register("individual", tools.initCycle, creator.Individual,
+                     list((toolbox.attr_float,toolbox.attr_float)), IND_SIZE)
+
+    #population
+    toolbox.register("population", tools.initRepeat, list, toolbox.individual)
+    population = toolbox.population(n=5)
+    ind1 = toolbox.individual()
+    print(ind1)
+
+
 
 if __name__ == "__main__":
     #arguments

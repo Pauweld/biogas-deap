@@ -1,17 +1,19 @@
 import matplotlib.pyplot as plt
 
-ind = [(5,10),(10,20),(20,20),(25,10),(40,7),(50,5),(60,0)]
+ind = [5,10,10,20,20,20,25,10,40,7,50,5,60,0]
 
 def getX(ind):
     list = [0]
     for i in range(0,len(ind)):
-        list.append(ind[i][0])
+        if (i%2 == 0):
+            list.append(ind[i])
     return list
 
 def getY(ind):
     list = [0]
     for i in range(0,len(ind)):
-        list.append(ind[i][1])
+        if (i%2 == 1):
+            list.append(ind[i])
     return list
 
 def show_plot(ind):

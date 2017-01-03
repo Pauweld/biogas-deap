@@ -1,6 +1,7 @@
 import random
 import argparse
 import pprint
+import numpy
 
 from data_manager import *
 from plot import show_plot
@@ -35,30 +36,51 @@ def main(a,b,gen):
     data = fill_data(a)
     cinetiques = fill_data(b)
     #algorithm
-    for courbe in range(len(data)-1)
+       
+    #individus
+    creator.create("FitnessMin", base.Fitness, weights=(-1.0,))
+    creator.create("Individual", list, fitness=creator.FitnessMin)
+
+    #individual size
+    IND_SIZE = 7
+    toolbox = base.Toolbox()
+    toolbox.register("attr_item", createIndividual)
+    toolbox.register("individual", tools.initRepeat, creator.Individual,
+                    toolbox.attr_item, 1)
+
+    #population
+    toolbox.register("population", tools.initRepeat, list, toolbox.individual)
+    population = toolbox.population(n=2)
+    for p in population:
+        print(p)
+        show_plot(p)
         
-        #individus
-        creator.create("FitnessMin", base.Fitness, weights=(-1.0,))
-        creator.create("Individual", list, fitness=creator.FitnessMin)
+def createIndividual():
+    x1 = random.randint(0, 30)
+    y1 = random.uniform(0, 500)
+    
+    x2 = random.randint(x1, 40)
+    y2 = 2*y1
 
-        #individual size
-        IND_SIZE = 7
-        toolbox = base.Toolbox()
-        toolbox.register("attr_float", random.random)
-        toolbox.register("individual", tools.initCycle, creator.Individual,
-                         list(list((toolbox.attr_float,toolbox.attr_float))), IND_SIZE)
+    x3 = random.randint(x2, 60)
+    y3 = y2
 
-        #population
-        toolbox.register("population", tools.initRepeat, list, toolbox.individual)
-        population = toolbox.population(n=5)
-        for p in population:
-            print(p)
-           show_plot(p)
+    x4 = random.randint(x3, 60)
+    y4 = y1
+
+    x5 = random.randint(x4, 60)
+    y5 = random.uniform(0, y4-1)
+
+    x6 = random.randint(x5, 60)
+    y6 = random.uniform(0, y5)
+
+    x7 = random.randint(x6, 60)
+    y7 = 0
+    return [x1,y1,x2,y2,x3,y3,x4,y4,x5,y5,x6,y6,x7,y7]
 
 def fitness(individual,f,num_intrant):
     data = fill_data(f)
-    
-    return
+    return    
 
 if __name__ == "__main__":
     #arguments

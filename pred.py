@@ -1,11 +1,13 @@
 import random
 import argparse
+import pprint
 
-from plot import *
-
+from data_manager import *
+from plot import show_plot
 from deap import creator
 from deap import tools
 from deap import base
+from evaluate import evaluate
 
 def main(a,b,gen):
     #data
@@ -30,27 +32,33 @@ def main(a,b,gen):
         if i not in name_intrants_d:
             print('Fichiers érronés')
             return
-
+    data = fill_data(a)
+    cinetiques = fill_data(b)
     #algorithm
-    #individus
-    creator.create("FitnessMin", base.Fitness, weights=(-1.0,))
-    creator.create("Individual", list, fitness=creator.FitnessMin)
+    for courbe in range(len(data)-1)
+        
+        #individus
+        creator.create("FitnessMin", base.Fitness, weights=(-1.0,))
+        creator.create("Individual", list, fitness=creator.FitnessMin)
 
-    IND_SIZE = 7
-    toolbox = base.Toolbox()
-    toolbox.register("attr_float", random.random)
-    toolbox.register("individual", tools.initCycle, creator.Individual,
-                     (toolbox.attr_float,toolbox.attr_float), IND_SIZE)
+        #individual size
+        IND_SIZE = 7
+        toolbox = base.Toolbox()
+        toolbox.register("attr_float", random.random)
+        toolbox.register("individual", tools.initCycle, creator.Individual,
+                         list(list((toolbox.attr_float,toolbox.attr_float))), IND_SIZE)
 
-    #population
-    toolbox.register("population", tools.initRepeat, list, toolbox.individual)
-    population = toolbox.population(n=5)
-    ind1 = toolbox.individual()
-    ind2 = toolbox.individual()
-    show_plot(ind1)
-    show_plot(ind2)
+        #population
+        toolbox.register("population", tools.initRepeat, list, toolbox.individual)
+        population = toolbox.population(n=5)
+        for p in population:
+            print(p)
+           show_plot(p)
 
-
+def fitness(individual,f,num_intrant):
+    data = fill_data(f)
+    
+    return
 
 if __name__ == "__main__":
     #arguments

@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
+import numpy as np
 
-ind = [[5,10,10,20,20,20,25,10,40,7,50,5,60,0]]
+ind = [[5,10.1,10,20.2,20,20.5,25,10.6,40,7,50,5,60,0]]
 
 def getX(ind):
     list = [0]
@@ -17,8 +18,8 @@ def getY(ind):
     return list
 
 def show_plot(ind):
-    listX = getX(ind)
-    listY = getY(ind)
+    listX = getX(ind[0])
+    listY = getY(ind[0])
     plt.plot(listX, listY)
     plt.axis([0, listX[7]+2, 0, listY[2]+2])
     plt.xlabel('Temps (jours)')
@@ -26,5 +27,14 @@ def show_plot(ind):
     #plt.savefig('plot.png', bbox_inches='tight')
     plt.show()
 
-show_plot(ind[0])
-
+def getValue(ind, x):
+    listX = getX(ind[0])
+    listY = getY(ind[0])
+    i = 0
+    while x > listX[i]:
+        i = i+1
+    m,b = np.polyfit([listX[i-1],listX[i]], [listY[i-1],listY[i]], 1)
+    return m*x+b
+    
+print(getValue(ind, 19))
+show_plot(ind)

@@ -4,7 +4,7 @@ import pprint
 import numpy
 
 from data_manager import *
-from plot import show_plot
+from plot import *
 from deap import creator
 from deap import tools
 from deap import base
@@ -52,8 +52,11 @@ def main(a,b,gen):
     toolbox.register("population", tools.initRepeat, list, toolbox.individual)
     population = toolbox.population(n=2)
     for p in population:
-        print(p)
-        show_plot(p)
+        #print(p)
+        #show_plot(p)
+        p.fitness.values = Fitness(p,a,2)
+
+    
         
 def createIndividual():
     x1 = random.randint(0, 30)
@@ -78,9 +81,15 @@ def createIndividual():
     y7 = 0
     return [x1,y1,x2,y2,x3,y3,x4,y4,x5,y5,x6,y6,x7,y7]
 
-def fitness(individual,f,num_intrant):
+def Fitness(individual,f,num_intrant):
     data = fill_data(f)
-    return    
+    r = random.randint(0,60)
+    c = getValue(individual,r)
+    d = data[num_intrant][r]
+    print('r : ',r)
+    print('c : ',c)
+    print('d : ',d)
+    return float(c)-float(d)
 
 if __name__ == "__main__":
     #arguments

@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 
-ind = [5,10,10,20,20,20,25,10,40,7,50,5,60,0]
+ind = [[5,10,10,20,20,20,25,10,40,7,50,5,60,0]]
 
 def getX(ind):
     list = [0]
@@ -26,5 +26,5 @@ def show_plot(ind):
     #plt.savefig('plot.png', bbox_inches='tight')
     plt.show()
 
-show_plot(ind)
+show_plot(ind[0])
 

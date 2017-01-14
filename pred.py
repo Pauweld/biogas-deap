@@ -35,26 +35,56 @@ def main(a,b,gen):
             return
     data = fill_data(a)
     cinetiques = fill_data(b)
-    #algorithm
-       
-    #individus
-    creator.create("FitnessMin", base.Fitness, weights=(-1.0,))
+    ###########
+    #deap     #
+    ###########
+
+    #individuals
+    creator.create("FitnessMin", Fitness, weights=(1,))
     creator.create("Individual", list, fitness=creator.FitnessMin)
 
-    #individual size
-    IND_SIZE = 7
+    #functions
     toolbox = base.Toolbox()
     toolbox.register("attr_item", createIndividual)
     toolbox.register("individual", tools.initRepeat, creator.Individual,
                     toolbox.attr_item, 1)
+    toolbox.register("mate", tools.cxTwoPoint)
+    toolbox.register("mutate", tools.mutGaussian, mu=0, sigma=1, indpb=0.2)
+    toolbox.register("select", tools.selTournament, tournsize=3)
+    toolbox.register("evaluate", evaluateInd)
 
     #population
     toolbox.register("population", tools.initRepeat, list, toolbox.individual)
-    population = toolbox.population(n=2)
-    for p in population:
-        #print(p)
-        #show_plot(p)
-        p.fitness.values = Fitness(p,a,2)
+    population = toolbox.population(n=5)
+
+    ###########
+    #algorithm#
+    ###########
+    for g in 1:
+        #new generation (size(offsprint) < size(population))
+        offspring = toolbox.select(population, len(population))
+        #clone theses to avoid modifying in the population
+        offspring = map(toolbox.clone, offspring)
+        #crossover
+        for child1, child2 in zip(offspring[::2], offspring[1::2]):
+            #0.5 = probability to crossever
+            if random.random() < 0.5:
+                toolbox.mate(child1, child2)
+                del child1.fitness.values
+                del child2.fitness.values
+        #mutation
+        for mutant in offspring:
+            if random.random() < 0.02:
+                toolbox.mutate(mutant)
+                del mutant.fitness.values
+        #reevaluate invalid individuals
+        invalid_ind = [ind for ind in offspring if not ind.fitness.valid]
+        fitnesses = toolbox.map(toolbox.evaluate, invalid_ind)
+        for ind, fit in zip(invalid_ind, fitnesses):
+            ind.fitness.values = fit
+
+        #replacing in the pop
+        pop.append(offspring)
 
     
         
@@ -81,15 +111,21 @@ def createIndividual():
     y7 = 0
     return [x1,y1,x2,y2,x3,y3,x4,y4,x5,y5,x6,y6,x7,y7]
 
+def respectConstraints(ind):
+    #y2
+    if ind[3]:
+
 def Fitness(individual,f,num_intrant):
     data = fill_data(f)
     r = random.randint(0,60)
     c = getValue(individual,r)
     d = data[num_intrant][r]
-    print('r : ',r)
-    print('c : ',c)
-    print('d : ',d)
-    return float(c)-float(d)
+    print('jour random : ',r)
+    print('cinetiques : ',c)
+    print('data journalieres : ',d)
+    print('différence :',float(c)-float(d))
+    print('Taux :',(float(c)-float(d))/float(d))
+    return float(c)-float(d),(float(c)-float(d))/float(d)
 
 if __name__ == "__main__":
     #arguments

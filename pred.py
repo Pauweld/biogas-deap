@@ -11,6 +11,7 @@ from deap import tools
 from deap import base
 from crossover import *
 from evaluate import *
+from mutation import *
 
 def main(a,b,gen):
     tps1 = time.clock()
@@ -52,7 +53,7 @@ def main(a,b,gen):
     toolbox.register("individual", tools.initRepeat, creator.Individual,
                     toolbox.attr_item, 1)
     toolbox.register("mate", crossover)
-    toolbox.register("mutate", tools.mutGaussian, mu=0, sigma=1, indpb=0.2)
+    toolbox.register("mutate", mutation)
     toolbox.register("select", tools.selTournament, tournsize=3)
     toolbox.register("evaluate", Fitness,f=a,num_intrant=2)
 
@@ -73,20 +74,17 @@ def main(a,b,gen):
         #crossover
         for child1, child2 in zip(offspring[::2], offspring[1::2]):
             #0.5 = probability to crossover
-            #print('#####',child1,'#####')
             if random.random() < 0.5:
                 toolbox.mate(child1, child2)
                 del child1.fitness.values
                 del child2.fitness.values
         #mutation
-        #for mutant in offspring:
-        #    if random.random() < 0.02:
-        #        toolbox.mutate(mutant)
-        #        del mutant.fitness.values
+        for mutant in offspring:
+            if random.random() < 0.02:
+                toolbox.mutate(mutant)
+                del mutant.fitness.values
         #reevaluate invalid individuals
-        invalid_ind = [ind for ind in offspring if not ind.fitness.valid]
-        #for i in range(len(invalid_ind)):
-            #show_plot(invalid_ind[i],'g'+str(g+1)+'-i'+str(i+1))
+        #invalid_ind = [ind for ind in offspring if not ind.fitness.valid]
         #fitnesses = toolbox.map(toolbox.evaluate, invalid_ind)
         #for ind, fit in zip(invalid_ind, fitnesses):
         #    ind.fitness.values = fit

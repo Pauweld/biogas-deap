@@ -15,7 +15,6 @@ def crossover(ind1, ind2):
     cxpoint = random.randint(1, size - 1)
     while((cxpoint % 2) != 0):
         cxpoint = random.randint(1, size - 1)
-    print('coupe', cxpoint)
-    ind1[cxpoint:], ind2[cxpoint:] = ind2[cxpoint:], ind1[cxpoint:]
+    ind1[0][cxpoint:], ind2[0][cxpoint:] = ind2[0][cxpoint:], ind1[0][cxpoint:]
     
     return ind1, ind2

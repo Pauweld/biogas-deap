@@ -59,7 +59,7 @@ def main(a,b,gen):
 
     #population
     toolbox.register("population", tools.initRepeat, list, toolbox.individual)
-    population = toolbox.population(n=100)
+    population = toolbox.population(n=10)
 
 
     ###########
@@ -70,7 +70,6 @@ def main(a,b,gen):
         offspring = toolbox.select(population, len(population))
         #clone theses to avoid modifying in the population
         offspring = list(map(toolbox.clone, offspring))
-        #print('#####',offspring,'#####')
         #crossover
         for child1, child2 in zip(offspring[::2], offspring[1::2]):
             #0.5 = probability to crossover
@@ -84,27 +83,29 @@ def main(a,b,gen):
                 toolbox.mutate(mutant)
                 del mutant.fitness.values
         #reevaluate invalid individuals
-        #invalid_ind = [ind for ind in offspring if not ind.fitness.valid]
-        #fitnesses = toolbox.map(toolbox.evaluate, invalid_ind)
-        #for ind, fit in zip(invalid_ind, fitnesses):
-        #    ind.fitness.values = fit
+        invalid_ind = [ind for ind in offspring if not ind.fitness.valid]
+        fitnesses = toolbox.map(toolbox.evaluate, invalid_ind)
+        for ind, fit in zip(invalid_ind, fitnesses):
+            ind.fitness.values = fit
         #replacing in the pop
         population[:] = offspring
+        for i in range(len(population)):
+            show_plot(population[i],'gen'+str(g+1)+'-ind'+str(i+1))
     tps2 = time.clock()
     print('-----------------FIN-----------------')
-    print('Nombre d\individus :',100)
+    print('Nombre d\individus :',10)
     print('Temps d\'execution pour',gen,'génération(s) :',tps2 - tps1)
 
 
         
 def createIndividual():
-    x1 = random.randint(0, 30)
-    y1 = random.uniform(0, 500)
+    x1 = random.randint(0, 15)
+    y1 = random.uniform(0, 1000)
     
-    x2 = random.randint(x1, 40)
+    x2 = random.randint(x1, 30)
     y2 = 2*y1
 
-    x3 = random.randint(x2, 60)
+    x3 = random.randint(x2, 50)
     y3 = y2
 
     x4 = random.randint(x3, 60)

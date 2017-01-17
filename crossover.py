@@ -11,8 +11,11 @@ def crossover(ind1, ind2):
     This function uses the :func:`~random.randint` function from the
     python base :mod:`random` module.
     """
-    size = min(len(ind1[0]), len(ind2[0]))
+    size = len(ind1[0])
     cxpoint = random.randint(1, size - 1)
+    while((cxpoint % 2) != 0):
+        cxpoint = random.randint(1, size - 1)
+    print('coupe', cxpoint)
     ind1[cxpoint:], ind2[cxpoint:] = ind2[cxpoint:], ind1[cxpoint:]
     
     return ind1, ind2

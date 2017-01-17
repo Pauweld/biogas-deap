@@ -85,8 +85,8 @@ def main(a,b,gen):
         #        del mutant.fitness.values
         #reevaluate invalid individuals
         invalid_ind = [ind for ind in offspring if not ind.fitness.valid]
-        for i in range(len(invalid_ind)):
-            show_plot(invalid_ind[i],'g'+str(g+1)+'-i'+str(i+1))
+        #for i in range(len(invalid_ind)):
+            #show_plot(invalid_ind[i],'g'+str(g+1)+'-i'+str(i+1))
         #fitnesses = toolbox.map(toolbox.evaluate, invalid_ind)
         #for ind, fit in zip(invalid_ind, fitnesses):
         #    ind.fitness.values = fit
@@ -122,9 +122,6 @@ def createIndividual():
     y7 = 0
     return [x1,y1,x2,y2,x3,y3,x4,y4,x5,y5,x6,y6,x7,y7]
 
-#def respectConstraints(ind):
-    #y2
-    #if ind[3]:
 
 if __name__ == "__main__":
     #arguments

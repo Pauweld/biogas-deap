@@ -9,7 +9,7 @@ from plot import *
 from deap import creator
 from deap import tools
 from deap import base
-from evaluate import evaluate
+#from evaluate import evaluate
 
 def main(a,b,gen):
     tps1 = time.clock()
@@ -69,7 +69,7 @@ def main(a,b,gen):
         offspring = list(map(toolbox.clone, offspring))
         #crossover
         for child1, child2 in zip(offspring[::2], offspring[1::2]):
-            #0.5 = probability to crossever
+            #0.5 = probability to crossover
             if random.random() < 0.5:
                 toolbox.mate(child1, child2)
                 del child1.fitness.values

@@ -17,15 +17,15 @@ def getY(ind):
             list.append(ind[i])
     return list
 
-def show_plot(ind):
+def show_plot(ind,name):
     listX = getX(ind[0])
     listY = getY(ind[0])
     plt.plot(listX, listY)
     plt.axis([0, listX[7]+2, 0, listY[2]+2])
     plt.xlabel('Temps (jours)')
     plt.ylabel('Quantité de méthane (m^3)')
-    #plt.savefig('plot.png', bbox_inches='tight')
-    plt.show()
+    plt.savefig(str(name)+'.png', bbox_inches='tight')
+    #plt.show()
 
 def getValue(ind, x):
     listX = getX(ind[0])
@@ -37,4 +37,4 @@ def getValue(ind, x):
     return m*x+b
     
 #print(getValue(ind, 19))
-#show_plot(ind)
+#show_plot(ind,1)

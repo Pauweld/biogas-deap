@@ -9,7 +9,8 @@ from plot import *
 from deap import creator
 from deap import tools
 from deap import base
-#from evaluate import evaluate
+from crossover import *
+from evaluate import *
 
 def main(a,b,gen):
     tps1 = time.clock()
@@ -49,8 +50,8 @@ def main(a,b,gen):
     toolbox = base.Toolbox()
     toolbox.register("attr_item", createIndividual)
     toolbox.register("individual", tools.initRepeat, creator.Individual,
-                    toolbox.attr_item, 7)
-    toolbox.register("mate", tools.cxOnePoint)
+                    toolbox.attr_item, 1)
+    toolbox.register("mate", crossover)
     toolbox.register("mutate", tools.mutGaussian, mu=0, sigma=1, indpb=0.2)
     toolbox.register("select", tools.selTournament, tournsize=3)
     toolbox.register("evaluate", Fitness,f=a,num_intrant=2)
@@ -58,6 +59,7 @@ def main(a,b,gen):
     #population
     toolbox.register("population", tools.initRepeat, list, toolbox.individual)
     population = toolbox.population(n=100)
+
 
     ###########
     #algorithm#
@@ -67,9 +69,11 @@ def main(a,b,gen):
         offspring = toolbox.select(population, len(population))
         #clone theses to avoid modifying in the population
         offspring = list(map(toolbox.clone, offspring))
+        #print('#####',offspring,'#####')
         #crossover
         for child1, child2 in zip(offspring[::2], offspring[1::2]):
             #0.5 = probability to crossover
+            #print('#####',child1,'#####')
             if random.random() < 0.5:
                 toolbox.mate(child1, child2)
                 del child1.fitness.values
@@ -81,10 +85,11 @@ def main(a,b,gen):
         #        del mutant.fitness.values
         #reevaluate invalid individuals
         invalid_ind = [ind for ind in offspring if not ind.fitness.valid]
-        fitnesses = toolbox.map(toolbox.evaluate, invalid_ind)
-        for ind, fit in zip(invalid_ind, fitnesses):
-            ind.fitness.values = fit
-
+        for i in range(len(invalid_ind)):
+            show_plot(invalid_ind[i],'g'+str(g+1)+'-i'+str(i+1))
+        #fitnesses = toolbox.map(toolbox.evaluate, invalid_ind)
+        #for ind, fit in zip(invalid_ind, fitnesses):
+        #    ind.fitness.values = fit
         #replacing in the pop
         population[:] = offspring
     tps2 = time.clock()
@@ -92,7 +97,7 @@ def main(a,b,gen):
     print('Nombre d\individus :',100)
     print('Temps d\'execution pour',gen,'génération(s) :',tps2 - tps1)
 
-    
+
         
 def createIndividual():
     x1 = random.randint(0, 30)
@@ -120,15 +125,6 @@ def createIndividual():
 #def respectConstraints(ind):
     #y2
     #if ind[3]:
-
-def Fitness(individual,f,num_intrant):
-    data = fill_data(f)
-    r = random.randint(1,58)
-    c = float(getValue(individual,r))
-    d = float(data[num_intrant][r])
-    #print('différence :',float(c)-float(d))
-    #print('Taux :',(float(c)-float(d))/float(d))
-    return float(c)-float(d),(float(c)-float(d))/float(d)
 
 if __name__ == "__main__":
     #arguments

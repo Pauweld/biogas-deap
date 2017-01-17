@@ -99,13 +99,13 @@ def main(a,b,gen):
 
         
 def createIndividual():
-    x1 = random.randint(0, 15)
+    x1 = random.randint(0, 30)
     y1 = random.uniform(0, 1000)
     
-    x2 = random.randint(x1, 30)
+    x2 = random.randint(x1, 45)
     y2 = 2*y1
 
-    x3 = random.randint(x2, 50)
+    x3 = random.randint(x2, 60)
     y3 = y2
 
     x4 = random.randint(x3, 60)

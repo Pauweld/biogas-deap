@@ -1,4 +1,7 @@
 import random
+#from plot import *
+
+#ind = [[5,10.1,10,20.2,20,20.2,25,10.6,40,7,50,5,60,0]]
 
 def mutation(individual):
     i = random.randint(0,len(individual[0])-1)
@@ -10,9 +13,23 @@ def mutation(individual):
         individual[0][1] = round(individual[0][1], 2)
     elif(i == 12):
         individual[0][12] = random.randint(individual[0][10],60.0)
+    elif(i == 2):
+        individual[0][2] = random.randint(individual[0][0],individual[0][4])
+        individual[0][3] = random.uniform(individual[0][1],individual[0][3])
+        individual[0][3] = round(individual[0][3], 2)
+        individual[0][5] = individual[0][3]
+    elif(i == 4):
+        individual[0][4] = random.randint(individual[0][2],individual[0][4])
+        individual[0][5] = random.uniform(individual[0][3],individual[0][5])
+        individual[0][5] = round(individual[0][5], 2)
+        individual[0][3] = individual[0][5]
     else:
         individual[0][i] = random.randint(individual[0][i-2],individual[0][i+2])
         individual[0][i+1] = random.uniform(individual[0][i-1],individual[0][i+3])
         individual[0][i+1] = round(individual[0][i+1], 2)
 
     return individual
+
+#if __name__ == "__main__":
+
+    #show_plot(mutation(ind),'a')

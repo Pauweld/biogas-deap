@@ -67,7 +67,8 @@ def main(a,b,gen):
     ###########
     for g in range(gen):
         #new generation (size(offsprint) < size(population))
-        offspring = toolbox.select(population, len(population))
+        # selection de la moitié de la population totale
+        offspring = toolbox.select(population, len(population)/2)
         #clone theses to avoid modifying in the population
         offspring = list(map(toolbox.clone, offspring))
         #crossover

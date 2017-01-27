@@ -8,7 +8,7 @@ def crossover(ind1, ind2):
     cxpoint = random.randint(1, size - 1)
     while((cxpoint % 2) != 0 or cxpoint == 2 or cxpoint == 4):
         cxpoint = random.randint(1, size - 1)
-    print(cxpoint)
+    #print(cxpoint)
     ind1[0][cxpoint:], ind2[0][cxpoint:] = ind2[0][cxpoint:], ind1[0][cxpoint:]
     
     return ind1, ind2

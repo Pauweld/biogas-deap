@@ -68,7 +68,7 @@ def main(a,b,gen):
     for g in range(gen):
         #new generation (size(offsprint) < size(population))
         # selection de la moitié de la population totale
-        offspring = toolbox.select(population, len(population)/2)
+        offspring = toolbox.select(population, len(population))
         #clone theses to avoid modifying in the population
         offspring = list(map(toolbox.clone, offspring))
         #crossover
@@ -92,6 +92,7 @@ def main(a,b,gen):
         population[:] = offspring
         for i in range(len(population)):
             show_plot(population[i],'gen'+str(g+1)+'-ind'+str(i+1))
+            print(population[i].fitness.values)
     tps2 = time.clock()
     print('-----------------FIN-----------------')
     print('Nombre d\individus :',10)

@@ -23,7 +23,7 @@ def show_plot(ind,name):
     plt.plot(listX, listY)
     plt.axis([0, max(listX)+2, 0, max(listY)+(0.2*max(listY))])
     plt.xlabel('Temps (jours)')
-    plt.ylabel('Quantité de méthane (m^3)')
+    plt.ylabel('Quantité de méthane (Nm^3)')
     plt.savefig(str(name)+'.png', bbox_inches='tight')
     plt.clf()
     #plt.show()

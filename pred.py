@@ -61,7 +61,6 @@ def main(a,b,gen):
     toolbox.register("population", tools.initRepeat, list, toolbox.individual)
     population = toolbox.population(n=10)
 
-
     ###########
     #algorithm#
     ###########
@@ -101,7 +100,7 @@ def main(a,b,gen):
 
         
 def createIndividual():
-    x1 = random.randint(0, 20)
+    x1 = random.randint(1, 20)
     y1 = random.uniform(0, 50)
     
     x2 = random.randint(x1, 40)

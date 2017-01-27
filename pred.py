@@ -101,10 +101,10 @@ def main(a,b,gen):
 
         
 def createIndividual():
-    x1 = random.randint(0, 30)
-    y1 = random.uniform(0, 1000)
+    x1 = random.randint(0, 20)
+    y1 = random.uniform(0, 50)
     
-    x2 = random.randint(x1, 45)
+    x2 = random.randint(x1, 40)
     y2 = 2*y1
 
     x3 = random.randint(x2, 60)

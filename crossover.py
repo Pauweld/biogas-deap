@@ -4,16 +4,20 @@ import random
 #ind2 = [[4,5.1,6,18.2,25,18.2,30,12,40,10,50,7,55,0]]
 
 def crossover(ind1, ind2):
+    tmp = 0
     size = len(ind1[0])
     cxpoint = random.randint(1, size - 1)
     while((cxpoint % 2) != 0 or cxpoint == 2 or cxpoint == 4):
         cxpoint = random.randint(1, size - 1)
     ind1[0][cxpoint:], ind2[0][cxpoint:] = ind2[0][cxpoint:], ind1[0][cxpoint:]
-    if(cxpoint != 12):
-        if(ind1[0][cxpoint+2] < ind1[0][cxpoint]):
-            ind1[0][cxpoint+2] = ind1[0][cxpoint]
-        if(ind2[0][cxpoint+2] < ind2[0][cxpoint]):
-            ind2[0][cxpoint+2] = ind2[0][cxpoint]
+    tmp = cxpoint
+    while(tmp != 12):
+        print(tmp)
+        if(ind1[0][tmp+2] < ind1[0][tmp]):
+            ind1[0][tmp+2] = ind1[0][tmp]
+        if(ind2[0][tmp+2] < ind2[0][tmp]):
+            ind2[0][tmp+2] = ind2[0][tmp]
+        tmp = tmp+2
     
     return ind1, ind2
 

@@ -8,7 +8,7 @@ def mutation(individual):
     while(i % 2 != 0):
         i = random.randint(0,len(individual[0])-1)
     if(i == 0):
-        individual[0][0] = random.randint(0,individual[0][2])
+        individual[0][0] = random.randint(1,individual[0][2])
         individual[0][1] = random.uniform(0.0,individual[0][3])
         individual[0][1] = round(individual[0][1], 2)
     elif(i == 12):

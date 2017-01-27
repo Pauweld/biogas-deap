@@ -10,6 +10,7 @@ def Fitness(individual,f,num_intrant):
     r = random.randint(61,121)
     reelle = data[num_intrant-1][r]
     somme = 0
-    for i,j in zip(range(r-59,r),range(1,individual[0][-2])):
-        somme += getValue(individual,j) * int(data[num_intrant][i])
-    return  somme,somme/float(reelle)
+    for i in range(r-59,r):
+        for j in range(i,individual[0][-2]):
+            somme += getValue(individual,j) * int(data[num_intrant][i]) / 1000 * 0.32 / 100
+    return  abs(float(relle)-somme),somme/float(reelle)

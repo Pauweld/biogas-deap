@@ -12,4 +12,4 @@ def Fitness(individual,f,num_intrant):
     somme = 0
     for i,j in zip(range(r-59,r),range(1,individual[0][-2])):
         somme += getValue(individual,j) * int(data[num_intrant][i])
-    return  somme-reelle,somme/float(reelle)
+    return  somme,somme/float(reelle)

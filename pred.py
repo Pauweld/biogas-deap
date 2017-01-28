@@ -44,7 +44,7 @@ def main(a,b,gen):
     ###########
 
     #individuals
-    creator.create("FitnessMin", base.Fitness, weights=(1,))
+    creator.create("FitnessMin", base.Fitness, weights=(-1,))
     creator.create("Individual", list, fitness=creator.FitnessMin)
 
     #functions
@@ -81,6 +81,7 @@ def main(a,b,gen):
         for mutant in offspring:
             if random.random() < 0.02:
                 toolbox.mutate(mutant)
+                print('MUTATION : gen'+str(g+1)+'-ind'+str(mutant))
                 del mutant.fitness.values
         #reevaluate invalid individuals
         invalid_ind = [ind for ind in offspring if not ind.fitness.valid]

@@ -24,7 +24,7 @@ def Fitness(individual,f,num_intrant):
         #print('jour utilisé ',journals[0][i],'KG',journals[num_intrant][i])
         for j in range(1,etendue-k+1):
             calculee += getValue(individual,j) * float(journals[num_intrant][i]) * MO / 1000
-    print('Calculee',calculee,'Reelle',reelle,'Jour',val_random)
+    #print('Calculee',calculee,'Reelle',reelle,'Jour',val_random)
     return abs(float(reelle)-calculee),calculee/abs(float(reelle))
 
 #if __name__ == '__main__':

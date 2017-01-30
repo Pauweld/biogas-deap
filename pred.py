@@ -1,3 +1,6 @@
+# ceci est le main
+# il appelle tous les autres .py
+
 import random
 import argparse
 import pprint

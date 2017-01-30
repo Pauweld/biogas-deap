@@ -1,3 +1,5 @@
+# ici, on retrouve la structure de l'algo princpial qui sera appelé dans pred.py
+
 import random
 import numpy
 
@@ -69,6 +71,7 @@ def GA(a,b,gen,intrant,nom_intrant):
     return population[0]
 
 
+# permet de créer de façon aléatoire les individus
 def createIndividual():
     x1 = random.randint(1, 20)
     y1 = random.uniform(0, 50)

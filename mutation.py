@@ -1,3 +1,5 @@
+# ce fichier implémente la mutation pour un individu donné
+
 import random
 #from plot import *
 

@@ -1,3 +1,5 @@
+# la fonction d'évaluation qui prend en compte les individus générés et les .csv
+
 import random
 
 from data_manager import *

@@ -1,3 +1,5 @@
+# fonction de croisement entre 2 individus
+
 import random
 
 #ind1 = [[5,10.1,10,20.2,20,20.2,25,10.6,40,7,50,5,60,0]]

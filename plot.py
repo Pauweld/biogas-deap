@@ -1,7 +1,8 @@
+# ce fichier permet de gérer les graphes des individus
+#(récupérer les abscisses, les ordonnées, enregistrer le graphe et pouvoir lire une ordonnée en fonction d'un abscisse passé en paramètre)
+
 import matplotlib.pyplot as plt
 import numpy as np
-
-ind = [[5,10.1,10,20.2,20,20.5,25,10.6,40,7,50,5,60,0]]
 
 def getX(ind):
     list = [0]
@@ -36,6 +37,3 @@ def getValue(ind, x):
         i = i+1
     m,b = np.polyfit([listX[i-1],listX[i]], [listY[i-1],listY[i]], 1)
     return m*x+b
-    
-#print(getValue(ind, 19))
-#show_plot(ind,1)

@@ -11,6 +11,7 @@ from crossover import *
 from evaluate import *
 from mutation import *
 
+POP = 10
 
 def GA(a,b,gen,intrant,nom_intrant):
     
@@ -34,7 +35,7 @@ def GA(a,b,gen,intrant,nom_intrant):
 
     #population
     toolbox.register("population", tools.initRepeat, list, toolbox.individual)
-    population = toolbox.population(n=10)
+    population = toolbox.population(n=POP)
 
     ###########
     #algorithm#

@@ -17,8 +17,9 @@ from crossover import *
 from evaluate import *
 from mutation import *
 
+TOURS = 2
+
 def main(a,b,gen):
-    print('-----------------DEBUT-----------------')
     tps1 = time.clock()
     #data
     fa = open(a,'r')
@@ -52,25 +53,23 @@ def main(a,b,gen):
         cinetics_list[name_intrants_c[i]] = null_individual
         
     #########
-    for i in name_intrants_c:
-        #we find the indice of the intrant
-        for j in range(len(cinetiques)):
-            if cinetiques[j][0] == i:
-                intrant = j
-        #we launch the GA for this intrant
-        print('--------------------GA for',i.replace("\n", ""),'--------------------')
-        meilleur_individu = GA(a,b,gen,intrant,i)
+    for t in range(1,TOURS):
+        print('*******************TOUR'+str(t)+'*******************')
+        for i in name_intrants_c:
+            #we find the indice of the intrant
+            for j in range(len(cinetiques)):
+                if cinetiques[j][0] == i:
+                    intrant = j
+            #we launch the GA for this intrant
+            print('--------------------GA for',i.replace("\n", ""),'--------------------')
+            cinetics_list[i] = GA(a,b,gen,intrant,i)
     #########
+
+    print('--------------COURBES CINETIQUEs--------------')
+    print(cinetics_list)
     
     tps2 = time.clock()
-    print('-----------------FIN-----------------')
-    print('Nombre d\individus :',10)
     print('Temps d\'execution pour',gen,'génération(s) :',tps2 - tps1)
-
-
-        
-
-
 
 if __name__ == "__main__":
     #arguments

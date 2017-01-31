@@ -2,6 +2,7 @@
 
 import random
 import numpy
+import os, sys
 
 from plot import *
 from deap import creator
@@ -11,8 +12,10 @@ from crossover import *
 from evaluate import *
 from mutation import *
 
-
 def GA(a,b,gen,intrant,nom_intrant):
+
+    if not os.path.exists('./'+nom_intrant.replace("\n", "")):
+        os.mkdir('./'+nom_intrant.replace("\n", ""))
     
     ###########
     #deap     #
@@ -66,7 +69,7 @@ def GA(a,b,gen,intrant,nom_intrant):
         #replacing in the pop
         population[:] = offspring
         for i in range(len(population)):
-            show_plot(population[i],'gen'+str(g+1)+'-ind'+str(i+1)+'-'+nom_intrant.replace("\n", ""))
+            show_plot(population[i],'./'+nom_intrant.replace("\n", "")+'/'+'gen'+str(g+1)+'-ind'+str(i+1)+'-'+nom_intrant.replace("\n", ""))
             print(population[i].fitness.values)
     return population[0]
 

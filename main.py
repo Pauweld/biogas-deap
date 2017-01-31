@@ -66,7 +66,12 @@ def main(a,b,gen):
     #########
 
     print('--------------COURBES CINETIQUEs--------------')
-    print(cinetics_list)
+    #print(cinetics_list)
+    if not os.path.exists('./meilleurs_individus'):
+        os.mkdir('./meilleurs_individus')
+    for i in name_intrants_c:
+        show_plot(cinetics_list[i],'./meilleurs_individus/'+i.replace("\n", ""))
+        
     
     tps2 = time.clock()
     print('Temps d\'execution pour',gen,'génération(s) :',tps2 - tps1)

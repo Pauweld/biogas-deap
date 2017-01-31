@@ -7,8 +7,9 @@ from plot import *
 
 #individual = [[0,60,1,60,4,60]]
 
-#pour prendre en compte les autres intrants il faut ajouter un argument : tableau des autres individus.
-#avec 1 individu par intrant.
+#pour prendre en compte les autres intrants il faut ajouter un argument :
+#tableau des autres individus avec 1 individu par intrant.
+
 def Fitness(individual,f,num_intrant):
     etendue = individual[0][-2]-individual[0][0]
     #MO = matiere organique

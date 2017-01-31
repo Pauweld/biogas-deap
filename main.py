@@ -88,7 +88,12 @@ if __name__ == "__main__":
                         help="Cinetic curves in .csv format")
     parser.add_argument('-g', '--generations', type=int, default=100, required=True,
                         help="Number of generations to make")
+    parser.add_argument('-t', '--tours', type=int, default=2, required=False,
+                        help="Number of round to make")
+
     args = parser.parse_args()
+
+    TOURS = args.tours
     
     #start 
     main(args.donnees,args.cinetiques,args.generations)

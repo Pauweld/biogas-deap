@@ -35,7 +35,7 @@ def GA(a,b,gen,intrant,nom_intrant):
     toolbox.register("mate", crossover)
     toolbox.register("mutate", mutation)
     toolbox.register("select", tools.selTournament, tournsize=3)
-    toolbox.register("evaluate", Fitness,f=a,num_intrant=2)
+    toolbox.register("evaluate", Fitness,f=a,num_intrant=2,courbes)
 
     #population
     toolbox.register("population", tools.initRepeat, list, toolbox.individual)

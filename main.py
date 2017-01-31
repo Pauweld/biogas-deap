@@ -29,6 +29,7 @@ def main(a,b,gen):
     fa.close()
     
     #cinetics
+    MO, CINETIQUES = chargerCinetiques(b)
     fb = open(b,'r')
     header = fb.readline()
     nb_intrants_c = len(header.split(';'))-1

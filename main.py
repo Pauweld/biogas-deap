@@ -31,7 +31,8 @@ def main(a,b,gen):
     #cinetics
     MO, CINETIQUES = chargerCinetiques(b)
     fb = open(b,'r')
-    header = fb.readline()
+    fb.readline()
+    header = fb.readline()    
     nb_intrants_c = len(header.split(';'))-1
     name_intrants_c = header.split(';')[1:]
     fb.close()
@@ -48,26 +49,28 @@ def main(a,b,gen):
     cinetiques = fill_data(b)
 
     #list which would contain each curve of each intrant
+
     null_individual = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0]]
     cinetics_list = dict()
     for i in range(nb_intrants_c):
         cinetics_list[name_intrants_c[i]] = null_individual
-        
+
+    
     #########
-    for t in range(1,TOURS):
+    for t in range(0,TOURS):
         print('*******************TOUR'+str(t)+'*******************')
         for i in name_intrants_c:
             #we find the indice of the intrant
             for j in range(len(cinetiques)):
-                if cinetiques[j][0] == i:
+                if cinetiques[j][1] == i:
                     intrant = j
             #we launch the GA for this intrant
             print('--------------------GA for',i.replace("\n", ""),'--------------------')
-            cinetics_list[i] = GA(a,b,gen,intrant,i)
+            CINETIQUES[i] = GA(a,b,gen,intrant,i,MO,CINETIQUES)
     #########
 
     print('--------------COURBES CINETIQUEs--------------')
-    #print(cinetics_list)
+    print(CINETIQUES)
     if not os.path.exists('./meilleurs_individus'):
         os.mkdir('./meilleurs_individus')
     for i in name_intrants_c:

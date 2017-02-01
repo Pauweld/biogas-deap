@@ -14,7 +14,7 @@ from mutation import *
 
 POP = 10
 
-def GA(a,b,gen,intrant,nom_intrant):
+def GA(a,b,gen,intrant,nom_intrant,MO,CINETIQUES):
 
     if not os.path.exists('./'+nom_intrant.replace("\n", "")):
         os.mkdir('./'+nom_intrant.replace("\n", ""))
@@ -35,7 +35,8 @@ def GA(a,b,gen,intrant,nom_intrant):
     toolbox.register("mate", crossover)
     toolbox.register("mutate", mutation)
     toolbox.register("select", tools.selTournament, tournsize=3)
-    toolbox.register("evaluate", Fitness,f=a,num_intrant=2,courbes)
+    toolbox.register("evaluate", Fitness,f=a,num_intrant=intrant
+                     ,M=MO,CINETIQUES=CINETIQUES,nom_intrant=nom_intrant)
 
     #population
     toolbox.register("population", tools.initRepeat, list, toolbox.individual)
@@ -70,9 +71,9 @@ def GA(a,b,gen,intrant,nom_intrant):
             ind.fitness.values = fit
         #replacing in the pop
         population[:] = offspring
-        for i in range(len(population)):
-            show_plot(population[i],'./'+nom_intrant.replace("\n", "")+'/'+'gen'+str(g+1)+'-ind'+str(i+1)+'-'+nom_intrant.replace("\n", ""))
-            print(population[i].fitness.values)
+        #for i in range(len(population)):
+            #show_plot(population[i],'./'+nom_intrant.replace("\n", "")+'/'+'gen'+str(g+1)+'-ind'+str(i+1)+'-'+nom_intrant.replace("\n", ""))
+            #print(population[i].fitness.values)
     return population[0]
 
 

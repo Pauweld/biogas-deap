@@ -8,7 +8,7 @@ def fill_data(f):
     while ligne != '':
         ligne = ligne.split(';')
         for c in range(taille):
-            data[c].append(ligne[c])
+            data[c].append(ligne[c].replace('\n',''))
         ligne = fa.readline()
     fa.close()
     return data
@@ -35,9 +35,9 @@ def chargerCinetiques(f):
             if valeur != '':
                 intrants[data[i][0].replace('\n','')][0].append(j)
                 intrants[data[i][0].replace('\n','')][0].append(float(valeur))
-    print(MO)
-    print('\n')
-    print(intrants)
+    #print(MO)
+    #print('\n')
+    #print(intrants)
     return MO, intrants
         
 

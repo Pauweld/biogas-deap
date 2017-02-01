@@ -33,7 +33,10 @@ def getValue(ind, x):
     listX = getX(ind[0])
     listY = getY(ind[0])
     i = 0
-    while x > listX[i]:
-        i = i+1
-    m,b = np.polyfit([listX[i-1],listX[i]], [listY[i-1],listY[i]], 1)
-    return m*x+b
+    try:
+        while x > listX[i]:
+            i = i+1
+        m,b = np.polyfit([listX[i-1],listX[i]], [listY[i-1],listY[i]], 1)
+        return m*x+b
+    except:
+        return 0

@@ -12,7 +12,7 @@ from crossover import *
 from evaluate import *
 from mutation import *
 
-POP = 10
+POP = 40
 
 def GA(a,b,gen,intrant,nom_intrant,MO,CINETIQUES):
 
@@ -79,22 +79,22 @@ def GA(a,b,gen,intrant,nom_intrant,MO,CINETIQUES):
 
 # permet de créer de façon aléatoire les individus
 def createIndividual():
-    x1 = random.randint(1, 20)
+    x1 = random.randint(1, 5)
     y1 = random.uniform(0, 50)
     
-    x2 = random.randint(x1, 40)
+    x2 = random.randint(x1, 10)
     y2 = 2*y1
 
-    x3 = random.randint(x2, 60)
+    x3 = random.randint(x2, 20)
     y3 = y2
 
-    x4 = random.randint(x3, 60)
+    x4 = random.randint(x3, 30)
     y4 = y1
 
-    x5 = random.randint(x4, 60)
+    x5 = random.randint(x4, 40)
     y5 = random.uniform(0, y4-1)
 
-    x6 = random.randint(x5, 60)
+    x6 = random.randint(x5, 50)
     y6 = random.uniform(0, y5)
 
     x7 = random.randint(x6, 60)

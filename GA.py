@@ -79,24 +79,25 @@ def GA(a,b,gen,intrant,nom_intrant,MO,CINETIQUES):
 
 # permet de créer de façon aléatoire les individus
 def createIndividual():
-    x1 = random.randint(1, 5)
-    y1 = random.uniform(0, 100)
+
+    x1 = random.randint(1, 3)
+    y1 = random.uniform(0, 50)
     
-    x2 = random.randint(x1, 10)
+    x2 = random.randint(x1, 8)
     y2 = 2*y1
 
-    x3 = random.randint(x2, 20)
+    x3 = random.randint(x2, 13)
     y3 = y2
 
-    x4 = random.randint(x3, 30)
+    x4 = random.randint(x3, 20)
     y4 = y1
 
-    x5 = random.randint(x4, 40)
+    x5 = random.randint(x4, 25)
     y5 = random.uniform(0, y4-1)
 
-    x6 = random.randint(x5, 50)
+    x6 = random.randint(x5, 30)
     y6 = random.uniform(0, y5)
 
-    x7 = random.randint(x6, 60)
+    x7 = random.randint(x6, 35)
     y7 = 0
     return [x1,y1,x2,y2,x3,y3,x4,y4,x5,y5,x6,y6,x7,y7]

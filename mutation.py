@@ -14,7 +14,7 @@ def mutation(individual):
         individual[0][1] = random.uniform(0.0,individual[0][3])
         individual[0][1] = round(individual[0][1], 2)
     elif(i == 12):
-        individual[0][12] = random.randint(individual[0][10],60.0)
+        individual[0][12] = random.randint(individual[0][10],individual[0][10]*1.5)
     elif(i == 2):
         individual[0][2] = random.randint(individual[0][0],individual[0][4])
         individual[0][3] = random.uniform(individual[0][1],individual[0][3])

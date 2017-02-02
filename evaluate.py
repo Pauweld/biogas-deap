@@ -34,7 +34,7 @@ def Fitness(individual,f,num_intrant,M,CINETIQUES,nom_intrant):
             calculee += getValue(individual,j) * float(journals[num_intrant+1][i]) * MO / 1000
             it = iter(C_temp)
             for cle in it:
-                M_temp = float(M[cle].replace(',','.'))
+                M_temp = float(M[cle.replace('\n','')].replace(',','.'))
                 #print(cle,'jour:',j,'valeur:',journals[findColIndex(journals,cle)][i],'MO:',M_temp)
                 calculee += getValue(C_temp[cle],j) * float(journals[findColIndex(journals,cle)][i]) * M_temp / 1000
     #print('Calculee',calculee,'Reelle',reelle,'Jour',val_random)

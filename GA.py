@@ -12,7 +12,7 @@ from crossover import *
 from evaluate import *
 from mutation import *
 
-POP = 40
+POP = 100
 
 def GA(a,b,gen,intrant,nom_intrant,MO,CINETIQUES):
 

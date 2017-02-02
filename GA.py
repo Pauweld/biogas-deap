@@ -71,16 +71,16 @@ def GA(a,b,gen,intrant,nom_intrant,MO,CINETIQUES):
             ind.fitness.values = fit
         #replacing in the pop
         population[:] = offspring
-        #for i in range(len(population)):
-            #show_plot(population[i],'./'+nom_intrant.replace("\n", "")+'/'+'gen'+str(g+1)+'-ind'+str(i+1)+'-'+nom_intrant.replace("\n", ""))
-            #print(population[i].fitness.values)
+        for i in range(len(population)):
+            show_plot(population[i],'./'+nom_intrant.replace("\n", "")+'/'+'gen'+str(g+1)+'-ind'+str(i+1)+'-'+nom_intrant.replace("\n", ""))
+            print(population[i].fitness.values)
     return population[0]
 
 
 # permet de créer de façon aléatoire les individus
 def createIndividual():
     x1 = random.randint(1, 5)
-    y1 = random.uniform(0, 50)
+    y1 = random.uniform(0, 100)
     
     x2 = random.randint(x1, 10)
     y2 = 2*y1

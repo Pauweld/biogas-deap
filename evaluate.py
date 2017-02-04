@@ -11,6 +11,8 @@ from plot import *
 #tableau des autres individus avec 1 individu par intrant.
 
 def Fitness(individual,f,num_intrant,M,CINETIQUES,nom_intrant):
+    #print('CINETIQUES',CINETIQUES)
+    #print('nom_intrant',nom_intrant)
     C_temp = dict(CINETIQUES)
     del C_temp[nom_intrant.replace('\n','')]
     #it = iter(C_temp)
@@ -20,7 +22,7 @@ def Fitness(individual,f,num_intrant,M,CINETIQUES,nom_intrant):
     MO = float(M[nom_intrant.replace('\n','')].replace(',','.'))
     journals = fill_data(f)
     num_intrant = findColIndex(journals,nom_intrant)
-    val_random = random.randint(61,121)
+    val_random = random.randint(70,121)
     #val_random = 8
     calculee = 0
     reelle = journals[1][val_random]
@@ -35,12 +37,20 @@ def Fitness(individual,f,num_intrant,M,CINETIQUES,nom_intrant):
         #print('AUTRE JOUR ********************')
         for j in range(1,etendue-k+1):
             #print('jour utilisé ',journals[0][i],'intrant utilisé:',(journals[num_intrant][0]),'KG:',journals[num_intrant][i])
-            calculee += getValue(individual,j) * float(journals[num_intrant][i]) * MO / 1000
+            try:
+                calculee += getValue(individual,j) * float(journals[num_intrant][i]) * MO / 1000
+            except:
+                print('erreur:',journals[num_intrant][i],'nom_intrant:',nom_intrant,'num_intrant',num_intrant,'i',i)
+                break
             #print(journals[0][i],'jour',j,'calcul:',getValue(individual,j),'*',float(journals[num_intrant][i]),'*',MO,'/',1000,'=',getValue(individual,j) * float(journals[num_intrant][i]) * MO / 1000)
             it = iter(C_temp)
             for cle in it:
                 M_temp = float(M[cle].replace(',','.'))
-                calculee += getValue(C_temp[cle],j)*(float(journals[findColIndex(journals,cle)][i])/1000)*M_temp
+                try:
+                    calculee += getValue(C_temp[cle],j)*(float(journals[findColIndex(journals,cle)][i])/1000)*M_temp
+                except:
+                    print('erreur:',journals[findColIndex(journals,cle)][i],'nom_intrant:',nom_intrant,'num_intrant',num_intrant,'i',i)
+                    break
                 #print(getValue(C_temp[cle],j)*(float(journals[findColIndex(journals,cle)][i])/1000)*M_temp)
                 #print(cle,'jour:',j,'valeur:',journals[findColIndex(journals,cle)][i],'MO:',M_temp,'calcul : ',getValue(C_temp[cle],j) ,'*',float(journals[findColIndex(journals,cle)][i]),'*',M_temp,'/1000 = ',getValue(C_temp[cle],j)*float(journals[findColIndex(journals,cle)][i])/1000*M_temp)
     #print('calculee',calculee)

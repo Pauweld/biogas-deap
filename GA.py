@@ -73,7 +73,7 @@ def GA(a,b,gen,intrant,nom_intrant,MO,CINETIQUES):
         population[:] = offspring
         for i in range(len(population)):
             show_plot(population[i],'./'+nom_intrant.replace("\n", "")+'/'+'gen'+str(g+1)+'-ind'+str(i+1)+'-'+nom_intrant.replace("\n", ""))
-            print(population[i].fitness.values)
+            #print(population[i].fitness.values)
     return population[0]
 
 

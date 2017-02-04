@@ -17,7 +17,7 @@ def Fitness(individual,f,num_intrant,M,CINETIQUES,nom_intrant):
     del C_temp[nom_intrant.replace('\n','')]
     #it = iter(C_temp)
 
-    etendue = individual[0][-2]-individual[0][0]
+    etendue = individual[0][-2]
     #MO = matiere organique
     MO = float(M[nom_intrant.replace('\n','')].replace(',','.'))
     journals = fill_data(f)

@@ -11,6 +11,7 @@ from plot import *
 #tableau des autres individus avec 1 individu par intrant.
 
 def Fitness(individual,f,num_intrant,M,CINETIQUES,nom_intrant):
+    nom_intrant = nom_intrant.replace('\n','')
     #print('CINETIQUES',CINETIQUES)
     #print('nom_intrant',nom_intrant)
     C_temp = dict(CINETIQUES)
@@ -21,7 +22,7 @@ def Fitness(individual,f,num_intrant,M,CINETIQUES,nom_intrant):
     #MO = matiere organique
     MO = float(M[nom_intrant.replace('\n','')].replace(',','.'))
     journals = fill_data(f)
-    num_intrant = findColIndex(journals,nom_intrant)
+    num_intrant = findColIndex(journals,nom_intrant.replace('\n',''))
     val_random = random.randint(70,121)
     #val_random = 8
     calculee = 0
@@ -38,18 +39,20 @@ def Fitness(individual,f,num_intrant,M,CINETIQUES,nom_intrant):
         for j in range(1,etendue-k+1):
             #print('jour utilisé ',journals[0][i],'intrant utilisé:',(journals[num_intrant][0]),'KG:',journals[num_intrant][i])
             try:
-                calculee += getValue(individual,j) * float(journals[num_intrant][i]) * MO / 1000
+                calculee += getValue(individual,j) * float(journals[num_intrant][i].replace('\n','')) * MO / 1000
             except:
-                print('erreur:',journals[num_intrant][i],'nom_intrant:',nom_intrant,'num_intrant',num_intrant,'i',i)
+                print('erreur: nom_intrant:',nom_intrant,'num_intrant',num_intrant,'couple (i,k,j) :(i',i,' k',k,' j',j,')')
+                print('individu:',individual)
                 break
             #print(journals[0][i],'jour',j,'calcul:',getValue(individual,j),'*',float(journals[num_intrant][i]),'*',MO,'/',1000,'=',getValue(individual,j) * float(journals[num_intrant][i]) * MO / 1000)
             it = iter(C_temp)
             for cle in it:
-                M_temp = float(M[cle].replace(',','.'))
+                M_temp = float(M[cle.replace('\n','')].replace(',','.'))
                 try:
-                    calculee += getValue(C_temp[cle],j)*(float(journals[findColIndex(journals,cle)][i])/1000)*M_temp
+                    calculee += getValue(C_temp[cle.replace('\n','')],j)*(float(journals[findColIndex(journals,cle.replace('\n',''))][i].replace('\n',''))/1000)*M_temp
                 except:
-                    print('erreur:',journals[findColIndex(journals,cle)][i],'nom_intrant:',nom_intrant,'num_intrant',num_intrant,'i',i)
+                    print('erreur: cle',cle,'nom_intrant:',nom_intrant,'num_intrant',num_intrant,'couple (i,k,j) :(',i,' ',k,' ',j,')')
+                    print('individu:',individual)
                     break
                 #print(getValue(C_temp[cle],j)*(float(journals[findColIndex(journals,cle)][i])/1000)*M_temp)
                 #print(cle,'jour:',j,'valeur:',journals[findColIndex(journals,cle)][i],'MO:',M_temp,'calcul : ',getValue(C_temp[cle],j) ,'*',float(journals[findColIndex(journals,cle)][i]),'*',M_temp,'/1000 = ',getValue(C_temp[cle],j)*float(journals[findColIndex(journals,cle)][i])/1000*M_temp)

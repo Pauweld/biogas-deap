@@ -1,7 +1,7 @@
 def fill_data(f):
     fa = open(f,'r')
     data=list()
-    ligne = fa.readline()
+    ligne = fa.readline().replace('\n','')
     taille = len(ligne.split(';'))
     for a in range(taille):
         data.append([])

@@ -30,6 +30,8 @@ def main(a,b,gen):
     
     #cinetics
     MO, CINETIQUES = chargerCinetiques(b)
+    print(CINETIQUES)
+    print(MO)
     fb = open(b,'r')
     fb.readline()
     header = fb.readline()    
@@ -66,7 +68,12 @@ def main(a,b,gen):
                     intrant = j
             #we launch the GA for this intrant
             print('--------------------GA for',i.replace("\n", ""),'--------------------')
-            CINETIQUES[i] = GA(a,b,gen,intrant,i,MO,CINETIQUES)
+            CINETIQUES[i.replace('\n','')],erreur = GA(a,b,gen,intrant,i,MO,CINETIQUES)
+            
+            fichier = open("statistiques.txt", "a")
+            fichier.write("Tour: "+str(t)+" Intrant: "+str(i)+" Erreur au carré: "+str(erreur)+"\n")
+            fichier.close()
+            
     #########
 
     print('--------------COURBES CINETIQUEs--------------')

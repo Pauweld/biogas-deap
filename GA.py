@@ -12,7 +12,7 @@ from crossover import *
 from evaluate import *
 from mutation import *
 
-POP = 100
+POP = 3
 
 def GA(a,b,gen,intrant,nom_intrant,MO,CINETIQUES):
 
@@ -71,10 +71,12 @@ def GA(a,b,gen,intrant,nom_intrant,MO,CINETIQUES):
             ind.fitness.values = fit
         #replacing in the pop
         population[:] = offspring
+        somme = 0
         for i in range(len(population)):
+            somme += population[i].fitness.values[0]*population[i].fitness.values[0]
             show_plot(population[i],'./'+nom_intrant.replace("\n", "")+'/'+'gen'+str(g+1)+'-ind'+str(i+1)+'-'+nom_intrant.replace("\n", ""))
             #print(population[i].fitness.values)
-    return population[0]
+    return population[0],somme
 
 
 # permet de créer de façon aléatoire les individus

@@ -4,6 +4,8 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
+ind = [[5,10.1,10,20.2,20,20.2,27,20,35,10,45,8,55,0]]
+
 def getX(ind):
     list = [0]
     for i in range(0,len(ind)):
@@ -40,3 +42,6 @@ def getValue(ind, x):
         return m*x+b
     except:
         return 0
+
+if __name__ == '__main__':
+    show_plot(ind,'coucou')

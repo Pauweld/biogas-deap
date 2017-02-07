@@ -83,7 +83,7 @@ def GA(a,b,gen,intrant,nom_intrant,MO,CINETIQUES):
 def createIndividual():
 
     x1 = random.randint(1, 3)
-    y1 = random.uniform(0, 50)
+    y1 = random.uniform(30, 70)
     
     x2 = random.randint(x1, 8)
     y2 = 2*y1

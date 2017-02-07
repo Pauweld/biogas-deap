@@ -23,8 +23,8 @@ def Fitness(individual,f,num_intrant,M,CINETIQUES,nom_intrant):
     MO = float(M[nom_intrant.replace('\n','')].replace(',','.'))
     journals = fill_data(f)
     num_intrant = findColIndex(journals,nom_intrant.replace('\n',''))
-    val_random = random.randint(70,121)
-    #val_random = 8
+    #val_random = random.randint(70,1000)
+    val_random = 8
     calculee = 0
     reelle = journals[1][val_random]
 
@@ -36,7 +36,7 @@ def Fitness(individual,f,num_intrant,M,CINETIQUES,nom_intrant):
     for i,k in zip(range(val_random-etendue+1,val_random),range(1,etendue)):
         # 0,1,..,4-k
         #print('AUTRE JOUR ********************')
-        for j in range(1,etendue-k+1):
+        for j in range(etendue-k+1,1,-1):
             #print('jour utilisé ',journals[0][i],'intrant utilisé:',(journals[num_intrant][0]),'KG:',journals[num_intrant][i])
             try:
                 calculee += getValue(individual,j) * float(journals[num_intrant][i].replace('\n','')) * MO / 1000

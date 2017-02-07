@@ -23,8 +23,8 @@ def Fitness(individual,f,num_intrant,M,CINETIQUES,nom_intrant):
     MO = float(M[nom_intrant.replace('\n','')].replace(',','.'))
     journals = fill_data(f)
     num_intrant = findColIndex(journals,nom_intrant.replace('\n',''))
-    #val_random = random.randint(70,1000)
-    val_random = 8
+    val_random = random.randint(70,1000)
+    #val_random = 8
     calculee = 0
     reelle = journals[1][val_random]
 

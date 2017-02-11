@@ -35,24 +35,25 @@ def Fitness(individual,f,num_intrant,M,CINETIQUES,nom_intrant):
     #range(1 car on veut s'arreter un cran en avance(jour 59)
     for i,k in zip(range(val_random-etendue+1,val_random),range(1,etendue)):
         # 0,1,..,4-k
-        #print('AUTRE JOUR ********************')
         for j in range(etendue-k+1,1,-1):
             #print('jour utilisé ',journals[0][i],'intrant utilisé:',(journals[num_intrant][0]),'KG:',journals[num_intrant][i])
             try:
-                calculee += getValue(individual,j) * float(journals[num_intrant][i].replace('\n','')) * MO / 1000
+                calculee += getValue(individual,j) * float(journals[num_intrant][i].replace('\n','')) * MO / 1000 / 100
             except:
                 print('erreur: nom_intrant:',nom_intrant,'num_intrant',num_intrant,'couple (i,k,j) :(i',i,' k',k,' j',j,')')
                 print('individu:',individual)
+                print('get value1:',getValue(individual,j))
                 break
             #print(journals[0][i],'jour',j,'calcul:',getValue(individual,j),'*',float(journals[num_intrant][i]),'*',MO,'/',1000,'=',getValue(individual,j) * float(journals[num_intrant][i]) * MO / 1000)
             it = iter(C_temp)
             for cle in it:
                 M_temp = float(M[cle.replace('\n','')].replace(',','.'))
                 try:
-                    calculee += getValue(C_temp[cle.replace('\n','')],j)*(float(journals[findColIndex(journals,cle.replace('\n',''))][i].replace('\n',''))/1000)*M_temp
+                    calculee += getValue(C_temp[cle.replace('\n','')],j)*(float(journals[findColIndex(journals,cle.replace('\n',''))][i].replace('\n',''))/1000)/100*M_temp
                 except:
                     print('erreur: cle',cle,'nom_intrant:',nom_intrant,'num_intrant',num_intrant,'couple (i,k,j) :(',i,' ',k,' ',j,')')
                     print('individu:',individual)
+                    print('get value:',getValue(C_temp[cle.replace('\n','')],j))
                     break
                 #print(getValue(C_temp[cle],j)*(float(journals[findColIndex(journals,cle)][i])/1000)*M_temp)
                 #print(cle,'jour:',j,'valeur:',journals[findColIndex(journals,cle)][i],'MO:',M_temp,'calcul : ',getValue(C_temp[cle],j) ,'*',float(journals[findColIndex(journals,cle)][i]),'*',M_temp,'/1000 = ',getValue(C_temp[cle],j)*float(journals[findColIndex(journals,cle)][i])/1000*M_temp)

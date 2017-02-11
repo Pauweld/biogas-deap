@@ -7,6 +7,7 @@ import pprint
 import numpy
 import time
 
+from time import gmtime, strftime
 from GA import *
 from data_manager import *
 from plot import *
@@ -16,6 +17,8 @@ from deap import base
 from crossover import *
 from evaluate import *
 from mutation import *
+from prediction import *
+
 
 TOURS = 2
 
@@ -86,6 +89,24 @@ def main(a,b,gen):
         
     tps2 = time.clock()
     print('Temps d\'execution pour',gen,'génération(s) :',tps2 - tps1)
+
+    heure = strftime("%H%M%S", gmtime())
+    fichier = open('./meilleurs_individus/cinetiques-g'+str(gen)+'-t'+str(TOURS)+'-'+heure+'.txt','w')
+    for a in CINETIQUES:
+        fichier.write(a+' '+str(CINETIQUES[a])+'\n')
+    fichier.close()
+
+    print('-----------Calcul prédictions-----------')
+    MO = {'Graisse de Flottation': 4,
+          'Fumier Bovin': 24,
+          'Lisier Porc': 6.3,
+          'Ensilage de Mais': 27.13,
+          'Mat. Stercoaire': 23.5,
+          'Ensilage de CIVE': 31.2
+          }
+    prediction(data, CINETIQUES, 'CINETIQUES THEORIES', MO, 1000, 1250)
+    print('Prédiction terminées')
+    print('-----------FIN-----------')
 
 if __name__ == "__main__":
     #arguments

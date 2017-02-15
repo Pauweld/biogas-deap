@@ -11,8 +11,9 @@ from deap import base
 from crossover import *
 from evaluate import *
 from mutation import *
+from operator import attrgetter
 
-POP = 20
+POP = 10
 
 def GA(a,b,gen,intrant,nom_intrant,MO,CINETIQUES):
 
@@ -34,23 +35,25 @@ def GA(a,b,gen,intrant,nom_intrant,MO,CINETIQUES):
                                     toolbox.attr_item, 1)
     toolbox.register("mate", crossover)
     toolbox.register("mutate", mutation)
-    toolbox.register("select", tools.selTournament, tournsize=3)
+    toolbox.register("select", tools.selRoulette)
     toolbox.register("evaluate", Fitness,f=a,num_intrant=intrant
                      ,M=MO,CINETIQUES=CINETIQUES,nom_intrant=nom_intrant)
 
     #population
     toolbox.register("population", tools.initRepeat, list, toolbox.individual)
     population = toolbox.population(n=POP)
+    for al in population:
+            al.fitness.values = toolbox.evaluate(al)
 
     ###########
     #algorithm#
     ###########
     for g in range(gen):
         #new generation (size(offsprint) < size(population))
+        
         # selection de la moitié de la population totale
-        offspring = toolbox.select(population, len(population))
-        #clone theses to avoid modifying in the population
-        offspring = list(map(toolbox.clone, offspring))
+        offspring = toolbox.select(population, int(len(population)/2))
+    
         #crossover
         for child1, child2 in zip(offspring[::2], offspring[1::2]):
             #0.5 = probability to crossover
@@ -70,12 +73,11 @@ def GA(a,b,gen,intrant,nom_intrant,MO,CINETIQUES):
         for ind, fit in zip(invalid_ind, fitnesses):
             ind.fitness.values = fit
         #replacing in the pop
-        population[:] = offspring
         somme = 0
-        for i in range(len(population)):
+        for i in range(len(offspring)):
             somme += population[i].fitness.values[0]*population[i].fitness.values[0]
             show_plot(population[i],'./'+nom_intrant.replace("\n", "")+'/'+'gen'+str(g+1)+'-ind'+str(i+1)+'-'+nom_intrant.replace("\n", ""))
-            #print(population[i].fitness.values)
+        print(len(population))
     return population[0],somme
 
 

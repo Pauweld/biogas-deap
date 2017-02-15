@@ -5,7 +5,9 @@ Pour exectuer le programme vous avez besoin des mêmes intrants dans les 2 fichie
 INSTALLATION (Windows):
 
 $ python -m pip install numpy
+
 $ python -m pip install matplotlib
+
 $ python -m pip install deap
 
 EXECUTION: 

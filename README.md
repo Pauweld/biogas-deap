@@ -1,4 +1,4 @@
-# biogas-deap : This is a projet featured with Biosgas View company. 
+# biogas-deap : Projet en collaboration avec Biogas View
 
 Pour exectuer le programme vous avez besoin des mêmes intrants dans les 2 fichiers (cinétiques et journalières).
 
